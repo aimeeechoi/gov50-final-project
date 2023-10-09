@@ -11,4 +11,18 @@ output:
 
 ## Project thoughts
 
-I am interested in exploring data related to public safety in urban cities, or the Asian American experience in higher education.
+I am interested in exploring data related to job desirability.
+
+
+## Proposal
+
+Does the option to work remotely increase applications for job postings on LinkedIn? In this study, I will examine whether job postings on LinkedIn with the remote working option receive more higher application rates (application per view) than job postings without the option. I hypothesize that postings with the remote working option will receive more applications on average. Ever since the COVID-19 pandemic made remote working more widespread, uncertainties about their post-pandemic work have left employees experiencing anxiety and burnout; the option to work flexibly (that is, remotely) is shown to reduce this anxiety and thus make jobs more satisfactory. I will use a sample of 15,886 job postings on LinkedIn collected over two days in 2023, where the unit of analysis is a job posting. My explanatory variable of interest is the option to work remotely. The option to remote work is coded =1 for this variable, while the unavailability to work remotely is coded =0. My outcome variable is the proportion of applications per view. I would divide the number of views of a job posting by the number of applications it received in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved. 
+
+```{r}
+library(tidyverse)
+
+job_postings |>
+  nrow()
+  
+```
+
