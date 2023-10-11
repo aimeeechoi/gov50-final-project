@@ -21,6 +21,7 @@ Does the option to work remotely increase applications for job postings on Linke
 ```{r}
 library(tidyverse)
 
+job_postings <- read_excel("~/Desktop/job_postings.xlsx")
 job_postings
   
 ```
