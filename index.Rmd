@@ -23,30 +23,30 @@ Does the option to work remotely increase applications for job postings on Linke
 ```{r}
 library(tidyverse)
 library(readxl)
-job_postings <- read_excel("~/Desktop/job_postings.xlsx")
+raw <- read_excel("~/Desktop/job_postings.xlsx")
 
-remote_or_not <- job_postings |>
-  mutate(remote_allowed = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed")) |>
-  group_by(remote_allowed) |>
-  drop_na(applies, views)
-
-remote_or_not |>
-  select(job_id, title, applies, views, remote_allowed)
-
+## Organize data
+job_postings <- raw |>
+  drop_na(min_salary, applies, views) |>
+  mutate(remote = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed"),
+         app_per_view = applies / views,
+         salary_level = case_when(min_salary <= 60000 ~ "Low Salary",
+                                  min_salary > 60000 & min_salary <= 120000 ~ "Medium Salary",
+                                  min_salary > 120000 ~ "High Salary")) |>
+  filter(pay_period == "YEARLY") 
 ```
 
+## Visualization
+
 ```{r}
-plot1 <- remote_or_not |>
-  mutate(app_per_view = applies / views) |>
+job_postings |>
   summarize(mean_app_per_view = mean(app_per_view)) |>
-  ggplot(mapping = aes(x = remote_allowed,
+  ggplot(mapping = aes(x = remote,
                        y = mean_app_per_view)) +
   geom_col() +
   labs(x = "Remote Working Availability",
        y = "Average Applications per View Received",
        title = "Average Applications per View Received by Job Postings")
-
-plot1
 
 ```
 
