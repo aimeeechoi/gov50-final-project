@@ -18,7 +18,7 @@ I am interested in exploring data related to factors that influence hiring or jo
 
 Does the option to work remotely increase applications for job postings on LinkedIn? In this study, I will examine whether job postings on LinkedIn with the option to work remotely receive higher application rates (application per view) than job postings without the option. I hypothesize that postings with the remote working option will receive more applications on average. Ever since the COVID-19 pandemic made remote working more widespread and the job market more unstable, uncertainties about their post-pandemic work have left employees experiencing anxiety and burnout; the option to work flexibly (that is, remotely) is shown to reduce this anxiety and thus make jobs more satisfactory (Alexander et. al, 2021). I will use a sample of 15,886 job postings on LinkedIn collected over two days (July 23rd and 24th) in 2023, found on Kaggle. The unit of analysis for this data set is a job posting. My explanatory variable of interest is the option to work remotely: the option to work remotely is coded =1 for this variable, while the lack of an option to work remotely is coded =0. My outcome variable is the proportion of the number of applications the employer receives for every view they get for the job posting. I will divide the number of applications by number of views in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved. 
 
-## One Data Visualization
+## Load Data
 
 ```{r}
 library(tidyverse)
@@ -28,29 +28,49 @@ raw <- read_excel("~/Desktop/job_postings.xlsx")
 ## Organize data
 job_postings <- raw |>
   drop_na(min_salary, applies, views) |>
-  mutate(remote = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed"),
+  mutate(remote_allowed = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed"),
          app_per_view = applies / views,
-         salary_level = case_when(min_salary <= 60000 ~ "Low Salary",
+         `Salary Level` = case_when(min_salary <= 60000 ~ "Low Salary",
                                   min_salary > 60000 & min_salary <= 120000 ~ "Medium Salary",
                                   min_salary > 120000 ~ "High Salary")) |>
-  filter(pay_period == "YEARLY") 
+  filter(pay_period == "YEARLY")
 ```
 
-## Visualization
+## Visualizations
 
 ```{r}
 job_postings |>
+  group_by(remote_allowed) |> 
   summarize(mean_app_per_view = mean(app_per_view)) |>
-  ggplot(mapping = aes(x = remote,
+  ggplot(mapping = aes(x = remote_allowed,
                        y = mean_app_per_view)) +
   geom_col() +
   labs(x = "Remote Working Availability",
        y = "Average Applications per View Received",
        title = "Average Applications per View Received by Job Postings")
 
+job_postings |>
+  group_by(remote_allowed) |> 
+  summarize(mean_app_per_view = mean(app_per_view))
 ```
 
+```{r}
+## Facet wrap by salary level
+job_postings |>
+  group_by(remote_allowed, `Salary Level`) |> 
+  summarize(mean_app_per_view = mean(app_per_view)) |>
+  ggplot(mapping = aes(x = remote_allowed, 
+                       y = mean_app_per_view)) +
+  geom_col() +
+  facet_wrap(~`Salary Level`) +
+  labs(x = "Remote Working Availability",
+       y = "Average Applications per View Received",
+       title = "Average Applications per View Received by Job Postings")
+```
 
+## Analysis
+
+The first bar plot comparing the average applications per views received by job postings with and without the remote work option supports the hypothesis. Jobs with the remote work option had an average of 0.22 applications per view, which was slightly higher than the average of 0.19 applications per view received by jobs without the remote work option. This relationship appeared to be true even after controlling for the jobs' salary offer. In all three levels of minimum salary (low, medium, and high), the average applications per view were higher for job postings with the remote work option. The difference between the average applications per view was most significant for the high salary group. 
 
 
 
