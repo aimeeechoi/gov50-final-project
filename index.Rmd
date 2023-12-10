@@ -20,9 +20,10 @@ I will use a sample of 15,886 job postings on LinkedIn collected over two days (
 
 This study is of a cross-sectional research design, where I observe the outcome variable (application per view) of the treated (remote allowed) and control (remote not allowed) groups at a certain point in time. It is an observational study because no manipulation of the variables was done; I am observing a naturally assigned treatment. In the graph below, I plotted the distribution of the main outcome of interest, which is the application-per-view percentage for each job posting (or `app_per_view` on the dataset). As seen in the graph, the distribution is skewed to the right, with the majority of job postings having less than a 0.50 application rate.
 
-```{r echo = FALSE}
+```{r}
 library(tidyverse)
 library(readxl)
+library(ggthemes)
 raw <- read_excel("~/Desktop/job_postings.xlsx")
 ```
 # Organize data
@@ -43,11 +44,11 @@ job_postings <- raw |>
 ```{r}
 job_postings |>
   ggplot(mapping = aes(x = app_per_view)) +
-  geom_histogram(col = "white") +
+  geom_histogram(col = "white", fill = "black") +
   labs(x = "Application Rate",
        y = "Count",
        title = "Distribution of Application-per-View Rate across 2,552 LinkedIn Job Postings") +
-  theme(plot.title = element_text(size = 10))
+  theme_economist(base_size = 10)
 ```
 
 
@@ -61,11 +62,11 @@ job_postings |>
   summarize(mean_app_per_view = mean(app_per_view)) |>
   ggplot(mapping = aes(x = remote_factor,
                        y = mean_app_per_view)) +
-  geom_col() +
-  labs(x = "Remote Working Availability",
-       y = "Average Applications per View Received",
-       title = "Average Applications per View Received by Job Postings") +
-  theme(plot.title = element_text(size = 12))
+  geom_col(col = "white", fill = "black") +
+  labs(title = "Average Applications per View Received by Job Postings",
+       x = "Remote Working Availability",
+       y = "Average Applications per View Received") +
+  theme_economist(base_size = 10)
 
 job_postings |>
   group_by(remote_factor) |> 
@@ -80,12 +81,12 @@ job_postings |>
   summarize(mean_app_per_view = mean(app_per_view)) |>
   ggplot(mapping = aes(x = remote_factor, 
                        y = mean_app_per_view)) +
-  geom_col() +
+  geom_col(col = "white", fill = "black") +
   facet_wrap(~`Salary Level`) +
   labs(x = "Remote Work Option",
        y = "Average Applications per View Received",
-       title = "Average Applications per View Received by Job Postings of Varying Salary Levels") +
-  theme(plot.title = element_text(size = 10))
+       title = "Average Application Rate for Jobs of Varying Salary Levels") +
+  theme_economist(base_size = 10)
 ```
 This relationship appeared to be true even after controlling for the jobs' salary offer. In all three levels of minimum salary (low, medium, and high), the average applications per view were higher for job postings with the remote work option. The difference between the average applications per view was most significant for the high salary group. 
 
