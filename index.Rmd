@@ -46,7 +46,8 @@ job_postings |>
   geom_histogram(col = "white") +
   labs(x = "Application Rate",
        y = "Count",
-       title = "Distribution of Application-per-View Rate across 2,552 LinkedIn Job Postings")
+       title = "Distribution of Application-per-View Rate across 2,552 LinkedIn Job Postings") +
+  theme(plot.title = element_text(size = 10))
 ```
 
 
@@ -63,7 +64,8 @@ job_postings |>
   geom_col() +
   labs(x = "Remote Working Availability",
        y = "Average Applications per View Received",
-       title = "Average Applications per View Received by Job Postings")
+       title = "Average Applications per View Received by Job Postings") +
+  theme(plot.title = element_text(size = 12))
 
 job_postings |>
   group_by(remote_factor) |> 
@@ -82,7 +84,8 @@ job_postings |>
   facet_wrap(~`Salary Level`) +
   labs(x = "Remote Work Option",
        y = "Average Applications per View Received",
-       title = "Average Applications per View Received by Job Postings of Varying Salary Levels")
+       title = "Average Applications per View Received by Job Postings of Varying Salary Levels") +
+  theme(plot.title = element_text(size = 10))
 ```
 This relationship appeared to be true even after controlling for the jobs' salary offer. In all three levels of minimum salary (low, medium, and high), the average applications per view were higher for job postings with the remote work option. The difference between the average applications per view was most significant for the high salary group. 
 
