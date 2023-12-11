@@ -1525,33 +1525,38 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <p>I will use a sample of 15,886 job postings on LinkedIn collected over two days (July 23rd and 24th) in 2023, found on Kaggle. The number of units viable for this study—found by filtering out the ones with missing values on the <code>applies</code>, <code>views</code> and <code>min_salary</code> columns—is 2,552. The unit of analysis for this data set is a job posting. My explanatory variable of interest is the option to work remotely: the option to work remotely is coded =1 for this variable, while the lack of an option to work remotely is coded =0. My outcome variable is the proportion of the number of applications the employer receives for every view they get for the job posting. I will divide the number of applications by the number of views in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved.</p>
 <p>This study is of a cross-sectional research design, where I observe the outcome variable (application per view) of the treated (remote allowed) and control (remote not allowed) groups at a certain point in time. It is an observational study because no manipulation of the variables was done; I am observing a naturally assigned treatment. In the graph below, I plotted the distribution of the main outcome of interest, which is the application-per-view percentage for each job posting (or <code>app_per_view</code> on the dataset). As seen in the graph, the distribution is skewed to the right, with the majority of job postings having less than a 0.50 application rate.</p>
 <div class="layout-chunk" data-layout="l-body">
-
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span></span>
+<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/jrnold/ggthemes'>ggthemes</a></span><span class='op'>)</span></span>
+<span><span class='va'>raw</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='st'>"~/Desktop/job_postings.xlsx"</span><span class='op'>)</span></span></code></pre>
+</div>
 </div>
 <h1 id="organize-data">Organize data</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>&lt;-</span> <span class='va'>raw</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>drop_na</span><span class='op'>(</span><span class='va'>min_salary</span>, <span class='va'>applies</span>, <span class='va'>views</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>mutate</span><span class='op'>(</span>remote_binary <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span>, <span class='st'>"0"</span>, <span class='st'>"1"</span><span class='op'>)</span>,</span>
+<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/drop_na.html'>drop_na</a></span><span class='op'>(</span><span class='va'>min_salary</span>, <span class='va'>applies</span>, <span class='va'>views</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>remote_binary <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span>, <span class='st'>"0"</span>, <span class='st'>"1"</span><span class='op'>)</span>,</span>
 <span>         remote_binary <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/numeric.html'>as.numeric</a></span><span class='op'>(</span><span class='va'>remote_binary</span><span class='op'>)</span>,</span>
-<span>         remote_factor <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span>, <span class='st'>"No Remote"</span>, <span class='st'>"Remote Allowed"</span><span class='op'>)</span>,</span>
+<span>         remote_factor <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span>, <span class='st'>"No Remote"</span>, <span class='st'>"Remote Allowed"</span><span class='op'>)</span>,</span>
 <span>         app_per_view <span class='op'>=</span> <span class='va'>applies</span> <span class='op'>/</span> <span class='va'>views</span>,</span>
-<span>         `Salary Level` <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span><span class='va'>min_salary</span> <span class='op'>&lt;=</span> <span class='fl'>60000</span> <span class='op'>~</span> <span class='st'>"Low Salary"</span>,</span>
+<span>         `Salary Level` <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='va'>min_salary</span> <span class='op'>&lt;=</span> <span class='fl'>60000</span> <span class='op'>~</span> <span class='st'>"Low Salary"</span>,</span>
 <span>                                  <span class='va'>min_salary</span> <span class='op'>&gt;</span> <span class='fl'>60000</span> <span class='op'>&amp;</span> <span class='va'>min_salary</span> <span class='op'>&lt;=</span> <span class='fl'>120000</span> <span class='op'>~</span> <span class='st'>"Medium Salary"</span>,</span>
 <span>                                  <span class='va'>min_salary</span> <span class='op'>&gt;</span> <span class='fl'>120000</span> <span class='op'>~</span> <span class='st'>"High Salary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>pay_period</span> <span class='op'>==</span> <span class='st'>"YEARLY"</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>pay_period</span> <span class='op'>==</span> <span class='st'>"YEARLY"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
 <h1 id="plot-of-outcome-of-interest">Plot of Outcome of Interest</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>geom_histogram</span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Application Rate"</span>,</span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Application Rate"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Count"</span>,</span>
 <span>       title <span class='op'>=</span> <span class='st'>"Distribution of Application-per-View Rate across 2,552 LinkedIn Job Postings"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>theme</span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggthemes/man/theme_economist.html'>theme_economist</a></span><span class='op'>(</span>base_size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
@@ -1560,21 +1565,21 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>remote_factor</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'>summarize</span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_factor</span>,</span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>remote_factor</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_factor</span>,</span>
 <span>                       y <span class='op'>=</span> <span class='va'>mean_app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Remote Working Availability"</span>,</span>
-<span>       y <span class='op'>=</span> <span class='st'>"Average Applications per View Received"</span>,</span>
-<span>       title <span class='op'>=</span> <span class='st'>"Average Applications per View Received by Job Postings"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>theme</span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Average Applications per View Received by Job Postings"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Remote Working Availability"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Average Applications per View Received"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggthemes/man/theme_economist.html'>theme_economist</a></span><span class='op'>(</span>base_size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span></code></pre>
 </div>
 <img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>remote_factor</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'>summarize</span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>remote_factor</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <pre><code># A tibble: 2 × 2
   remote_factor  mean_app_per_view
@@ -1587,16 +1592,16 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>remote_factor</span>, <span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'>summarize</span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_factor</span>, </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>remote_factor</span>, <span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_factor</span>, </span>
 <span>                       y <span class='op'>=</span> <span class='va'>mean_app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Remote Work Option"</span>,</span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Remote Work Option"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Average Applications per View Received"</span>,</span>
-<span>       title <span class='op'>=</span> <span class='st'>"Average Applications per View Received by Job Postings of Varying Salary Levels"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'>theme</span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>       title <span class='op'>=</span> <span class='st'>"Average Application Rate for Jobs of Varying Salary Levels"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'><a href='https://rdrr.io/pkg/ggthemes/man/theme_economist.html'>theme_economist</a></span><span class='op'>(</span>base_size <span class='op'>=</span> <span class='fl'>10</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>

@@ -16,27 +16,28 @@ Does the option to work remotely increase applications for job postings on Linke
 
 ## Data
 
-I will use a sample of 15,886 job postings on LinkedIn collected over two days (July 23rd and 24th) in 2023, found on Kaggle. The number of units viable for this study—found by filtering out the ones with missing values on the `applies`, `views` and `min_salary` columns—is 2,552. The unit of analysis for this data set is a job posting. My explanatory variable of interest is the option to work remotely: the option to work remotely is coded =1 for this variable, while the lack of an option to work remotely is coded =0. My outcome variable is the proportion of the number of applications the employer receives for every view they get for the job posting. I will divide the number of applications by the number of views in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved. 
+I will use a sample of over 33,000 job postings on LinkedIn collected over two days (August 23rd and 24th) in 2023, found on Kaggle. The number of units viable for this study—found by filtering out the ones with missing values on the `applies`, `views` and `min_salary` columns—is 2,552. The unit of analysis for this data set is a job posting. My explanatory variable of interest is the option to work remotely: the option to work remotely is coded =1 for this variable, while the lack of an option to work remotely is coded “NA”. My outcome variable is the proportion of the number of applications the employer receives for every view they get for the job posting. I will divide the number of applications by the number of views in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved. 
 
 This study is of a cross-sectional research design, where I observe the outcome variable (application per view) of the treated (remote allowed) and control (remote not allowed) groups at a certain point in time. It is an observational study because no manipulation of the variables was done; I am observing a naturally assigned treatment. In the graph below, I plotted the distribution of the main outcome of interest, which is the application-per-view percentage for each job posting (or `app_per_view` on the dataset). As seen in the graph, the distribution is skewed to the right, with the majority of job postings having less than a 0.50 application rate.
 
 ```{r}
 library(tidyverse)
 library(readxl)
-library(ggthemes)
 raw <- read_excel("~/Desktop/job_postings.xlsx")
 ```
+
 # Organize data
 ```{r}
 job_postings <- raw |>
+  ## Drop missing values from relevant columns
   drop_na(min_salary, applies, views) |>
-  mutate(remote_binary = if_else(is.na(remote_allowed), "0", "1"),
-         remote_binary = as.numeric(remote_binary),
-         remote_factor = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed"),
+  ## Remove NAs from `remote_allowed`, create application rate variable, create salary level variable
+  mutate(remote_allowed = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed"),
          app_per_view = applies / views,
          `Salary Level` = case_when(min_salary <= 60000 ~ "Low Salary",
                                   min_salary > 60000 & min_salary <= 120000 ~ "Medium Salary",
                                   min_salary > 120000 ~ "High Salary")) |>
+  ## Filter to jobs with yearly pay period for consistency
   filter(pay_period == "YEARLY")
 ```
 
@@ -47,46 +48,47 @@ job_postings |>
   geom_histogram(col = "white", fill = "black") +
   labs(x = "Application Rate",
        y = "Count",
-       title = "Distribution of Application-per-View Rate across 2,552 LinkedIn Job Postings") +
-  theme_economist(base_size = 10)
+       title = "Distribution of Application Rate across 2,552 LinkedIn Job Postings") +
+  theme(plot.title = element_text(size = 12))
 ```
 
 
 
 ## Results
 
-# Overall Remote vs Non-remote Graph
+# Plot of Main Analysis
 ```{r}
 job_postings |>
-  group_by(remote_factor) |> 
+  group_by(remote_allowed) |> 
   summarize(mean_app_per_view = mean(app_per_view)) |>
-  ggplot(mapping = aes(x = remote_factor,
+  ggplot(mapping = aes(x = remote_allowed,
                        y = mean_app_per_view)) +
   geom_col(col = "white", fill = "black") +
-  labs(title = "Average Applications per View Received by Job Postings",
-       x = "Remote Working Availability",
+  labs(title = "Average Application Rate of Jobs with/without Remote Work Option",
+       x = "Remote Work Option",
        y = "Average Applications per View Received") +
-  theme_economist(base_size = 10)
+  theme(plot.title = element_text(size = 12))
 
 job_postings |>
-  group_by(remote_factor) |> 
-  summarize(mean_app_per_view = mean(app_per_view))
+  group_by(remote_allowed) |> 
+  summarize(mean_app_per_view = mean(app_per_view)) |>
+  knitr::kable(col.names = c("Remote Option", "Average Application Rate"))
 ```
 I first plotted a graph comparing the average applications per views received by job postings with and without the remote work option without taking other variables into account. Jobs with the remote work option had an average of 0.22 applications per view, which was slightly higher than the average of 0.19 applications per view received by jobs without the remote work option. 
 
-# Facet Wrap by Salary Level
+# Facet Wrap
 ```{r}
 job_postings |>
-  group_by(remote_factor, `Salary Level`) |> 
+  group_by(remote_allowed, `Salary Level`) |> 
   summarize(mean_app_per_view = mean(app_per_view)) |>
-  ggplot(mapping = aes(x = remote_factor, 
+  ggplot(mapping = aes(x = remote_allowed, 
                        y = mean_app_per_view)) +
   geom_col(col = "white", fill = "black") +
   facet_wrap(~`Salary Level`) +
   labs(x = "Remote Work Option",
        y = "Average Applications per View Received",
-       title = "Average Application Rate for Jobs of Varying Salary Levels") +
-  theme_economist(base_size = 10)
+       title = "Average Application Rate of Jobs of Varying Salary Levels") +
+  theme(plot.title = element_text(size = 12))
 ```
 This relationship appeared to be true even after controlling for the jobs' salary offer. In all three levels of minimum salary (low, medium, and high), the average applications per view were higher for job postings with the remote work option. The difference between the average applications per view was most significant for the high salary group. 
 
@@ -95,19 +97,21 @@ This relationship appeared to be true even after controlling for the jobs' salar
 ```{r}
 library(infer)
 
-reg <- lm(app_per_view ~ remote_binary, data = job_postings)
+reg <- lm(formula = app_per_view ~ remote_allowed, 
+          data = job_postings)
 
 modelsummary::modelsummary(reg,
                            statistic = c("s.e. = {std.error}",
                                          "p = {p.value}"),
                            gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
-First, I ran a regression run with only `remote_binary` as the explanatory variable. The coefficient of `remote_binary` was 0.028, meaning that on average, jobs with a remote-working option had an application rate that was **2.8 percentage points higher** than that of the jobs without a remote-working option. With a **p-value that is less than 0.001**, this estimated coefficient is **statistically significant** at an alpha level of 0.05. However, it is difficult to conclude a causal effect because a 2.8 percentage points difference is relatively minimal, and this regression does not take into account any potential confounding variables that could affect the estimated coefficient.
+First, I ran a regression run with only `remote_allowed` as the explanatory variable. The coefficient of `remote_allowed` was 0.028, meaning that on average, jobs with a remote-working option had an application rate that was **2.8 percentage points higher** than that of the jobs without a remote-working option. With a **p-value that is less than 0.001**, this estimated coefficient is **statistically significant** at an alpha level of 0.05. However, it is difficult to conclude a causal effect because a 2.8 percentage points difference is relatively minimal, and this regression does not take into account any potential confounding variables that could affect the estimated coefficient.
 
 
 # Multivariable Regression
 ```{r}
-multi_reg <- lm(app_per_view ~ remote_binary + `Salary Level` + application_type + sponsored, data = job_postings)
+multi_reg <- lm(formula = app_per_view ~ remote_allowed + `Salary Level` + application_type + sponsored, 
+                data = job_postings)
 
 modelsummary::modelsummary(multi_reg,
                            statistic = c("s.e. = {std.error}",
@@ -115,9 +119,19 @@ modelsummary::modelsummary(multi_reg,
                            gof_map = c("nobs", "r.squared", "adj.r.squared"))
 ```
 
-In this multivariable regression, I included `remote_binary`, `Salary Level`, `application_type`, and `sponsored` as the explanatory variable to account for other variables on the data set that may affect the estimated effects of `remote_binary` on the application rate. The coefficient of `remote_binary` was 0.035, meaning that on average, jobs with a remote-working option had an application rate that was **3.5 percentage points higher** than that of the jobs without a remote-working option, assuming that the salary level, application type, and sponsorship status are all held constant. This is a higher difference than the single-variable regression, signaling that the other explanatory variables had actually reduced the coefficient of `remote_binary`. This estimated coefficient is **statistically significant** because the **p-value is less than 0.001**, which is less than an alpha level of 0.05. While a 3.5 percentage points difference is still relatively small, it is safe to conclude that accounting for potential confounding variables in the data set, there is a **small positive correlation** between the remote-working option and the application rate. 
+In this multivariable regression, I included `remote_allowed`, `Salary Level`, `application_type`, and `sponsored` as the explanatory variable to account for other variables on the data set that may affect the estimated effects of `remote_allowed` on the application rate. The coefficient of `remote_allowed` was 0.035, meaning that on average, jobs with a remote-working option had an application rate that was **3.5 percentage points higher** than that of the jobs without a remote-working option, assuming that the salary level, application type, and sponsorship status are all held constant. This is a higher difference than the single-variable regression, signaling that the other explanatory variables had actually reduced the coefficient of `remote_allowed`. This estimated coefficient is **statistically significant** because the **p-value is less than 0.001**, which is less than an alpha level of 0.05. While a 3.5 percentage points difference is still relatively small, it is safe to conclude that accounting for potential confounding variables in the data set, there is a **small positive correlation** between the remote-working option and the application rate. 
 
 
 ## Conclusion
 
+# Summary
+The bar graphs visualizing the main outcome and explanatory variable of interest shows that jobs with the remote working option have a higher application rate on average. This was true across all three salary levels, clearly **supporting my hypothesis**. An interesting point to note is that the high salary group had the highest difference between the average application rate of the remote and non-remote groups. A potential reason for this is that applicants may expect high-paying jobs to have a more demanding component to the work, such as stricter rules about showing up to an office—therefore, the appeal of a high-paying job with a remote working option may be higher than the appeal of a job with a medium- or low-paying job with that option.
+
+The single-variable and multivariable regressions further support my hypothesis, with the positive estimated coefficient being statistically significant in both. The positive correlation between the remote working option and the application rate is slightly stronger on the multivariable regression model, meaning that when holding potentially confounding variables on the data set constant, the relationship becomes more accentuated.
+
+# Limitations and Threats to Inference
+The findings of this study are limited to jobs in the United States, for all units in the data set were collected from the US. They are also limited to jobs offered during the time of the year that the data set was created—August—because seasonal attributes like weather may affect the types of jobs people are willing to apply for or the location of jobs they prefer. Moreover, though the facet-wrapped bar graph and multivariable regression models attempted to account for certain confounding variables in the data set, there are other potential threats to inference. For one, some LinkedIn jobs adopt the “easy apply” system, which allows users to apply to the jobs directly through the app. The convenience of this option may increase one’s inclination to apply to such jobs. The number and type of benefits that each job offers may also be a source of confounding bias; jobs with the remote-working options coupled with certain benefits, such as 401K or medical insurance, may have accentuated appeal to applicants with specific needs.
+
+# Improving the Analysis
+Considering these limitations and threats to inference, there are several steps to take to bolster this analysis. 
 
