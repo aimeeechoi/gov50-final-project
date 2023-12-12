@@ -97,8 +97,7 @@ This relationship appeared to be true even after controlling for the jobs' salar
 ```{r}
 library(infer)
 
-reg <- lm(formula = app_per_view ~ remote_allowed, 
-          data = job_postings)
+reg <- lm(formula = app_per_view ~ remote_allowed, data = job_postings)
 
 modelsummary::modelsummary(reg,
                            statistic = c("s.e. = {std.error}",
@@ -110,8 +109,8 @@ First, I ran a regression run with only `remote_allowed` as the explanatory vari
 
 # Multivariable Regression
 ```{r}
-multi_reg <- lm(formula = app_per_view ~ remote_allowed + `Salary Level` + application_type + sponsored, 
-                data = job_postings)
+multi_reg <- lm(formula = app_per_view ~ remote_allowed + `Salary Level` 
+                + application_type + sponsored, data = job_postings)
 
 modelsummary::modelsummary(multi_reg,
                            statistic = c("s.e. = {std.error}",
@@ -133,5 +132,5 @@ The single-variable and multivariable regressions further support my hypothesis,
 The findings of this study are limited to jobs in the United States, for all units in the data set were collected from the US. They are also limited to jobs offered during the time of the year that the data set was created—August—because seasonal attributes like weather may affect the types of jobs people are willing to apply for or the location of jobs they prefer. Moreover, though the facet-wrapped bar graph and multivariable regression models attempted to account for certain confounding variables in the data set, there are other potential threats to inference. For one, some LinkedIn jobs adopt the “easy apply” system, which allows users to apply to the jobs directly through the app. The convenience of this option may increase one’s inclination to apply to such jobs. The number and type of benefits that each job offers may also be a source of confounding bias; jobs with the remote-working options coupled with certain benefits, such as 401K or medical insurance, may have accentuated appeal to applicants with specific needs.
 
 # Improving the Analysis
-Considering these limitations and threats to inference, there are several steps to take to bolster this analysis. 
+Considering these limitations and threats to inference, there are several steps to take to bolster this analysis. First, collecting data on the additional potential confounding variables mentioned (“easy apply” option and benefits offered) and including them in the regression model would help clarify and isolate the effects of the remote-working option on the application rate. It would also be helpful to conduct this study with data from previous years, especially  2020 and 2021, when the effects of the COVID-19 pandemic and subsequent social distancing regulations on  employment prospects were the strongest. Comparing the results from these varying years could shed light on the evolving importance of the remote-work option for Americans in the post-pandemic world.
 
