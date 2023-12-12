@@ -31,7 +31,7 @@ raw <- read_excel("~/Desktop/job_postings.xlsx")
 job_postings <- raw |>
   ## Drop missing values from relevant columns
   drop_na(min_salary, applies, views) |>
-  ## Remove NAs from `remote_allowed`, create application rate variable, create salary level variable
+  ## Create new variables
   mutate(remote_allowed = if_else(is.na(remote_allowed), "No Remote", "Remote Allowed"),
          app_per_view = applies / views,
          `Salary Level` = case_when(min_salary <= 60000 ~ "Low Salary",
