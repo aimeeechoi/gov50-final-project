@@ -60,7 +60,7 @@ job_postings |>
 
 ## Results
 
-# Summary Plot of Main Analysis
+# Summary Table and Plot of Main Analysis
 ```{r}
 job_postings |>
   group_by(remote_allowed) |> 
@@ -105,9 +105,12 @@ This relationship appeared to be true even after controlling for the jobs' salar
 # Single-variable Regression
 First, I ran a regression run with the main independent variable, `remote_allowed`, as the sole explanatory variable.
 
-```{r}
+```{r echo = FALSE}
 library(infer)
+```
 
+
+```{r}
 reg <- lm(formula = app_per_view ~ remote_allowed, data = job_postings)
 
 var_names1 <- c("(Intercept)" = "Intercept",
@@ -153,5 +156,5 @@ Here, the intercept was 0.213, indicating that jobs without the remote-work opti
 ## Conclusion
 The bar graphs visualizing the main outcome and explanatory variable of interest shows that jobs with the remote working option have a higher application rate on average. This was true across all three salary levels, clearly **supporting my hypothesis**. An interesting point to note is that the high salary group had the highest difference between the average application rate of the remote and non-remote groups. A potential reason for this is that applicants may expect high-paying jobs to have a more demanding component to the work, such as stricter rules about showing up to an office. Therefore, the appeal of a high-paying job with a remote working option may be higher than the appeal of a job with a medium- or low-paying job with that option. The single-variable and multivariable regression models further support my hypothesis, with the main coefficient of interest being positive and statistically significant in both. The positive correlation between the remote working option and the application rate is slightly stronger on the multivariable regression model, meaning that when holding potentially confounding variables on the data set constant, the relationship becomes more accentuated.
 
-The findings of this study are limited to jobs in the United States, for all units in the data set were collected from the US. They are also limited to jobs offered during the time of the year that the data set was created—August—because seasonal attributes like weather may affect the types and locations of jobs people prefer. Moreover, although the facet-wrapped bar graph and multivariable regression models attempted to account for confounding variables in the data set, there are other potential threats to inference. Some LinkedIn jobs adopt the “easy apply” system, which allows users to apply to the jobs directly through the app—he convenience of this option may increase one’s inclination to apply to such jobs. The number and type of benefits that each job offers may also be a source of confounding bias because jobs with the remote-working options coupled with certain benefits, such as 401K or medical insurance, may have accentuated appeal to applicants with specific needs. Considering these limitations and threats to inference, collecting data on the additional potential confounding variables mentioned and including them in the regression model would help isolate the effects of the remote-working option on the application rate. It would also be helpful to conduct this study with data from previous years, especially  2020 and 2021, when the effects of the COVID-19 pandemic and subsequent social distancing regulations on  employment prospects were the strongest. Comparing the results from these varying years could shed light on the evolving importance of the remote-work option for Americans in the post-pandemic era.
+The findings of this study are limited to jobs in the United States, for all units in the data set were collected from the US. They are also limited to jobs offered during the time of the year that the data set was created—August—because seasonal attributes like weather may affect the types and locations of jobs people prefer. Moreover, although the facet-wrapped bar graph and multivariable regression models attempted to account for confounding variables in the data set, there are other potential threats to inference. Some LinkedIn jobs adopt the “easy apply” system, which allows users to apply to the jobs directly through the app—the convenience of this option may increase one’s inclination to apply to such jobs. The number and type of benefits that each job offers may also be a source of confounding bias because jobs with the remote-working options coupled with certain benefits, such as 401K or medical insurance, may have accentuated appeal to applicants with specific needs. Considering these limitations and threats to inference, collecting data on the additional potential confounding variables mentioned and including them in the regression model would help isolate the effects of the remote-working option on the application rate. It would also be helpful to conduct this study with data from previous years, especially  2020 and 2021, when the effects of the COVID-19 pandemic and subsequent social distancing regulations on  employment prospects were the strongest. Comparing the results from these varying years could shed light on the evolving importance of the remote-work option for Americans in the post-pandemic era.
 
