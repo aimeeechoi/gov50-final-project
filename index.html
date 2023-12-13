@@ -90,7 +90,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--radix_placeholder_meta_tags-->
   <title>Gov 50 Final Project</title>
 
-  <meta property="description" itemprop="description" content="My final project"/>
+  <meta property="description" itemprop="description" content="Impact of the Remote-Working Option on LinkedIn Job Application Rate"/>
 
 
   <meta name="article:author" content="Aimee Choi"/>
@@ -98,19 +98,19 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
   <meta property="og:title" content="Gov 50 Final Project"/>
   <meta property="og:type" content="article"/>
-  <meta property="og:description" content="My final project"/>
+  <meta property="og:description" content="Impact of the Remote-Working Option on LinkedIn Job Application Rate"/>
   <meta property="og:locale" content="en_US"/>
 
   <!--  https://dev.twitter.com/cards/types/summary -->
   <meta property="twitter:card" content="summary"/>
   <meta property="twitter:title" content="Gov 50 Final Project"/>
-  <meta property="twitter:description" content="My final project"/>
+  <meta property="twitter:description" content="Impact of the Remote-Working Option on LinkedIn Job Application Rate"/>
 
   <!--/radix_placeholder_meta_tags-->
   <!--radix_placeholder_rmarkdown_metadata-->
 
   <script type="text/json" id="radix-rmarkdown-metadata">
-  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","description","output"]}},"value":[{"type":"character","attributes":{},"value":["Gov 50 Final Project"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Aimee Choi"]}]}]},{"type":"character","attributes":{},"value":["My final project"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","author","description","output"]}},"value":[{"type":"character","attributes":{},"value":["Gov 50 Final Project"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name"]}},"value":[{"type":"character","attributes":{},"value":["Aimee Choi"]}]}]},{"type":"character","attributes":{},"value":["Impact of the Remote-Working Option on LinkedIn Job Application Rate"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
   </script>
   <!--/radix_placeholder_rmarkdown_metadata-->
   
@@ -1495,7 +1495,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <!--radix_placeholder_front_matter-->
 
 <script id="distill-front-matter" type="text/json">
-{"title":"Gov 50 Final Project","description":"My final project","authors":[{"author":"Aimee Choi","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
+{"title":"Gov 50 Final Project","description":"Impact of the Remote-Working Option on LinkedIn Job Application Rate","authors":[{"author":"Aimee Choi","authorURL":"#","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}]}
 </script>
 
 <!--/radix_placeholder_front_matter-->
@@ -1508,7 +1508,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <h1>Gov 50 Final Project</h1>
 <!--radix_placeholder_categories-->
 <!--/radix_placeholder_categories-->
-<p>My final project</p>
+<p>Impact of the Remote-Working Option on LinkedIn Job Application Rate</p>
 </div>
 
 <div class="d-byline">
@@ -1520,66 +1520,52 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h2 id="introduction">Introduction</h2>
-<p>Does the option to work remotely increase applications for job postings on LinkedIn? In this study, I will examine whether job postings on LinkedIn with the option to work remotely receive higher application rates (application per view) than job postings without the option. I hypothesize that postings with the remote working option will receive more applications on average. Ever since the COVID-19 pandemic made remote working more widespread and the job market more unstable, uncertainties about their post-pandemic work have left employees experiencing anxiety and burnout; the option to work flexibly (that is, remotely) is shown to reduce this anxiety and thus make jobs more satisfactory (Alexander et. al, 2021).</p>
+<p>Does offering the option to work remotely increase the number of applications received by job postings on LinkedIn? In this study, I will examine whether job postings on LinkedIn with the option to work remotely receive higher application rates (the number of application per view) than job postings without the option. I hypothesize that postings with the remote working option will receive more applications on average. Ever since the COVID-19 pandemic made remote working more widespread and the job market more unstable, uncertainties about their post-pandemic work have left employees experiencing anxiety and burnout; the option to work flexibly (that is, remotely) is shown to reduce this anxiety and thus make jobs more satisfactory (Alexander et al. 2021).</p>
 <h2 id="data">Data</h2>
-<p>I will use a sample of over 33,000 job postings on LinkedIn collected over two days (August 23rd and 24th) in 2023, found on Kaggle. The number of units viable for this study—found by filtering out the ones with missing values on the <code>applies</code>, <code>views</code> and <code>min_salary</code> columns—is 2,552. The unit of analysis for this data set is a job posting. My explanatory variable of interest is the option to work remotely: the option to work remotely is coded =1 for this variable, while the lack of an option to work remotely is coded “NA”. My outcome variable is the proportion of the number of applications the employer receives for every view they get for the job posting. I will divide the number of applications by the number of views in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved.</p>
-<p>This study is of a cross-sectional research design, where I observe the outcome variable (application per view) of the treated (remote allowed) and control (remote not allowed) groups at a certain point in time. It is an observational study because no manipulation of the variables was done; I am observing a naturally assigned treatment. In the graph below, I plotted the distribution of the main outcome of interest, which is the application-per-view percentage for each job posting (or <code>app_per_view</code> on the dataset). As seen in the graph, the distribution is skewed to the right, with the majority of job postings having less than a 0.50 application rate.</p>
+<p>I will use a sample of over 33,000 job postings on LinkedIn collected over two days (August 23rd and 24th) in 2023, found on Kaggle. The number of units viable for this study—found by filtering out the ones with missing values on the <code>applies</code>, <code>views</code> and <code>min_salary</code> columns—is 2,552. The unit of analysis for this data set is a job posting. My explanatory variable of interest is the option to work remotely: the option to work remotely is coded =1 for this variable, while the lack of an option to work remotely is coded “NA”. My outcome variable is the proportion of the number of applications the employer receives for every view their job posting receives. I will divide the number of applications (<code>applies</code>) by the number of views (<code>views</code>) in order to obtain this value. A higher application-per-view for jobs with the remote working option would support my hypothesis. On the other hand, if the application-per-view for jobs with the remote working option is similar to or lower than that of jobs without the remote working option, my hypothesis would be disproved.</p>
+<p>This study is of a cross-sectional research design, where I observe the outcome variable (application per view) of the treated (remote allowed) and control (remote not allowed) groups at a certain point in time. It is an observational study because no manipulation of the variables was done; I am observing a naturally assigned treatment.</p>
+<div class="layout-chunk" data-layout="l-body">
+
+</div>
+<h1 id="tidying-data">Tidying Data</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span></span>
-<span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://readxl.tidyverse.org'>readxl</a></span><span class='op'>)</span></span>
-<span><span class='va'>raw</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://readxl.tidyverse.org/reference/read_excel.html'>read_excel</a></span><span class='op'>(</span><span class='st'>"~/Desktop/job_postings.xlsx"</span><span class='op'>)</span></span></code></pre>
-</div>
-</div>
-<h1 id="organize-data">Organize data</h1>
-<div class="layout-chunk" data-layout="l-body">
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>&lt;-</span> <span class='va'>raw</span> <span class='op'>|&gt;</span></span>
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>data</span> <span class='op'>&lt;-</span> <span class='fu'>read_excel</span><span class='op'>(</span><span class='st'>"~/Desktop/job_postings.xlsx"</span><span class='op'>)</span></span>
+<span></span>
+<span><span class='va'>job_postings</span> <span class='op'>&lt;-</span> <span class='va'>data</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='co'>## Drop missing values from relevant columns</span></span>
-<span>  <span class='fu'><a href='https://tidyr.tidyverse.org/reference/drop_na.html'>drop_na</a></span><span class='op'>(</span><span class='va'>min_salary</span>, <span class='va'>applies</span>, <span class='va'>views</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>drop_na</span><span class='op'>(</span><span class='va'>min_salary</span>, <span class='va'>applies</span>, <span class='va'>views</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='co'>## Create new variables</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/mutate.html'>mutate</a></span><span class='op'>(</span>remote_allowed <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/if_else.html'>if_else</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span>, <span class='st'>"No Remote"</span>, <span class='st'>"Remote Allowed"</span><span class='op'>)</span>,</span>
+<span>  <span class='fu'>mutate</span><span class='op'>(</span>remote_allowed <span class='op'>=</span> <span class='fu'>if_else</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/NA.html'>is.na</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span>, <span class='st'>"No Remote"</span>, <span class='st'>"Remote Allowed"</span><span class='op'>)</span>,</span>
 <span>         app_per_view <span class='op'>=</span> <span class='va'>applies</span> <span class='op'>/</span> <span class='va'>views</span>,</span>
-<span>         `Salary Level` <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/case_when.html'>case_when</a></span><span class='op'>(</span><span class='va'>min_salary</span> <span class='op'>&lt;=</span> <span class='fl'>60000</span> <span class='op'>~</span> <span class='st'>"Low Salary"</span>,</span>
+<span>         `Salary Level` <span class='op'>=</span> <span class='fu'>case_when</span><span class='op'>(</span><span class='va'>min_salary</span> <span class='op'>&lt;=</span> <span class='fl'>60000</span> <span class='op'>~</span> <span class='st'>"Low Salary"</span>,</span>
 <span>                                  <span class='va'>min_salary</span> <span class='op'>&gt;</span> <span class='fl'>60000</span> <span class='op'>&amp;</span> <span class='va'>min_salary</span> <span class='op'>&lt;=</span> <span class='fl'>120000</span> <span class='op'>~</span> <span class='st'>"Medium Salary"</span>,</span>
 <span>                                  <span class='va'>min_salary</span> <span class='op'>&gt;</span> <span class='fl'>120000</span> <span class='op'>~</span> <span class='st'>"High Salary"</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='co'>## Filter to jobs with yearly pay period for consistency</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>pay_period</span> <span class='op'>==</span> <span class='st'>"YEARLY"</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>pay_period</span> <span class='op'>==</span> <span class='st'>"YEARLY"</span><span class='op'>)</span></span></code></pre>
 </div>
 </div>
-<h1 id="plot-of-outcome-of-interest">Plot of Outcome of Interest</h1>
+<p>In the graph below, I plotted the distribution of the main outcome of interest, which is the application-per-view percentage for each job posting (or <code>app_per_view</code> on the dataset). As seen in the graph, the distribution is skewed to the right, with the majority of job postings having less than a 0.50 application rate.</p>
+<h1 id="summary-plot-of-dependent-variable">Summary Plot of Dependent Variable</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Application Rate"</span>,</span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_histogram</span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Application Rate"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Count"</span>,</span>
 <span>       title <span class='op'>=</span> <span class='st'>"Distribution of Application Rate across 2,552 LinkedIn Job Postings"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'>theme</span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-3-1.png" width="624" /></p>
 </div>
 <h2 id="results">Results</h2>
-<h1 id="plot-of-main-analysis">Plot of Main Analysis</h1>
+<h1 id="summary-plot-of-main-analysis">Summary Plot of Main Analysis</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_allowed</span>,</span>
-<span>                       y <span class='op'>=</span> <span class='va'>mean_app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Average Application Rate of Jobs with/without Remote Work Option"</span>,</span>
-<span>       x <span class='op'>=</span> <span class='st'>"Remote Work Option"</span>,</span>
-<span>       y <span class='op'>=</span> <span class='st'>"Average Applications per View Received"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
-</div>
-<img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" />
-<div class="sourceCode">
-<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'>summarize</span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
 <span>  <span class='fu'>knitr</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/knitr/man/kable.html'>kable</a></span><span class='op'>(</span>col.names <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Remote Option"</span>, <span class='st'>"Average Application Rate"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
 </div>
 <table>
@@ -1600,37 +1586,59 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 </tr>
 </tbody>
 </table>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>remote_allowed</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'>summarize</span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_allowed</span>,</span>
+<span>                       y <span class='op'>=</span> <span class='va'>mean_app_per_view</span>,</span>
+<span>                       fill <span class='op'>=</span> <span class='va'>remote_allowed</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>title <span class='op'>=</span> <span class='st'>"Average Application Rate of Jobs with/without Remote Work Option"</span>,</span>
+<span>       x <span class='op'>=</span> <span class='st'>"Remote Work Option"</span>,</span>
+<span>       y <span class='op'>=</span> <span class='st'>"Average Applications per View Received"</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>theme</span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>,</span>
+<span>        legend.position <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span></span></code></pre>
+</div>
+<p><img src="index_files/figure-html5/unnamed-chunk-4-1.png" width="624" /></p>
 </div>
 <p>I first plotted a graph comparing the average applications per views received by job postings with and without the remote work option without taking other variables into account. Jobs with the remote work option had an average of 0.22 applications per view, which was slightly higher than the average of 0.19 applications per view received by jobs without the remote work option.</p>
-<h1 id="facet-wrap">Facet Wrap</h1>
+<h1 id="faceting-by-salary-level">Faceting by Salary Level</h1>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>job_postings</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>remote_allowed</span>, <span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
-<span>  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarize</a></span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_allowed</span>, </span>
-<span>                       y <span class='op'>=</span> <span class='va'>mean_app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_bar.html'>geom_col</a></span><span class='op'>(</span>col <span class='op'>=</span> <span class='st'>"white"</span>, fill <span class='op'>=</span> <span class='st'>"black"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/facet_wrap.html'>facet_wrap</a></span><span class='op'>(</span><span class='op'>~</span><span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/labs.html'>labs</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Remote Work Option"</span>,</span>
+<span>  <span class='fu'>group_by</span><span class='op'>(</span><span class='va'>remote_allowed</span>, <span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>|&gt;</span> </span>
+<span>  <span class='fu'>summarize</span><span class='op'>(</span>mean_app_per_view <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>app_per_view</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>|&gt;</span></span>
+<span>  <span class='fu'>ggplot</span><span class='op'>(</span>mapping <span class='op'>=</span> <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>remote_allowed</span>, </span>
+<span>                       y <span class='op'>=</span> <span class='va'>mean_app_per_view</span>,</span>
+<span>                       fill <span class='op'>=</span> <span class='va'>remote_allowed</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>facet_wrap</span><span class='op'>(</span><span class='op'>~</span><span class='va'>`Salary Level`</span><span class='op'>)</span> <span class='op'>+</span></span>
+<span>  <span class='fu'>labs</span><span class='op'>(</span>x <span class='op'>=</span> <span class='st'>"Remote Work Option"</span>,</span>
 <span>       y <span class='op'>=</span> <span class='st'>"Average Applications per View Received"</span>,</span>
 <span>       title <span class='op'>=</span> <span class='st'>"Average Application Rate of Jobs of Varying Salary Levels"</span><span class='op'>)</span> <span class='op'>+</span></span>
-<span>  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/theme.html'>theme</a></span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/element.html'>element_text</a></span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>  <span class='fu'>theme</span><span class='op'>(</span>plot.title <span class='op'>=</span> <span class='fu'>element_text</span><span class='op'>(</span>size <span class='op'>=</span> <span class='fl'>12</span><span class='op'>)</span>,</span>
+<span>        legend.position <span class='op'>=</span> <span class='st'>"none"</span><span class='op'>)</span></span></code></pre>
 </div>
 <p><img src="index_files/figure-html5/unnamed-chunk-5-1.png" width="624" /></p>
 </div>
 <p>This relationship appeared to be true even after controlling for the jobs’ salary offer. In all three levels of minimum salary (low, medium, and high), the average applications per view were higher for job postings with the remote work option. The difference between the average applications per view was most significant for the high salary group.</p>
 <h1 id="single-variable-regression">Single-variable Regression</h1>
+<p>First, I ran a regression run with the main independent variable, <code>remote_allowed</code>, as the sole explanatory variable.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='https://github.com/tidymodels/infer'>infer</a></span><span class='op'>)</span></span>
 <span></span>
 <span><span class='va'>reg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>app_per_view</span> <span class='op'>~</span> <span class='va'>remote_allowed</span>, data <span class='op'>=</span> <span class='va'>job_postings</span><span class='op'>)</span></span>
 <span></span>
+<span><span class='va'>var_names1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
+<span>                <span class='st'>"remote_allowedRemote Allowed"</span> <span class='op'>=</span> <span class='st'>"Remote Allowed"</span><span class='op'>)</span></span>
+<span></span>
 <span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>reg</span>,</span>
 <span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
 <span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
-<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>var_names1</span><span class='op'>)</span></span></code></pre>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1645,7 +1653,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 <tbody>
 <tr>
 <td style="text-align:left;">
-(Intercept)
+Intercept
 </td>
 <td style="text-align:center;">
 0.191
@@ -1667,7 +1675,7 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-remote_allowedRemote Allowed
+Remote Allowed
 </td>
 <td style="text-align:center;">
 0.028
@@ -1714,17 +1722,27 @@ R2 Adj.
 </tbody>
 </table>
 </div>
-<p>First, I ran a regression run with only <code>remote_allowed</code> as the explanatory variable. The coefficient of <code>remote_allowed</code> was 0.028, meaning that on average, jobs with a remote-working option had an application rate that was <strong>2.8 percentage points higher</strong> than that of the jobs without a remote-working option. With a <strong>p-value that is less than 0.001</strong>, this estimated coefficient is <strong>statistically significant</strong> at an alpha level of 0.05. However, it is difficult to conclude a causal effect because a 2.8 percentage points difference is relatively minimal, and this regression does not take into account any potential confounding variables that could affect the estimated coefficient.</p>
+<p>The intercept of the line was 0.191, meaning that when <code>remote_allowed</code> is 0 (that is, the job does not have a remote-work option), the average application rate is a 19.1%. The coefficient of <code>remote_allowed</code> was 0.028, meaning that on average, jobs with a remote-working option had an application rate that was <strong>2.8 percentage points higher</strong> than that of the jobs without a remote-working option. With a <strong>p-value that is less than 0.001</strong>, this estimated coefficient is <strong>statistically significant</strong> at an alpha level of 0.05. However, it is difficult to conclude a causal effect because a 2.8 percentage points difference is relatively minimal, and this regression does not take into account any potential confounding variables that could affect the estimated coefficient.</p>
 <h1 id="multivariable-regression">Multivariable Regression</h1>
+<p>In this multivariable regression, I included <code>remote_allowed</code>, <code>Salary Level</code>, <code>application_type</code>, and <code>sponsored</code> as the explanatory variable to account for variables in the data set that may affect the estimated effects of <code>remote_allowed</code> on the application rate.</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span><span class='va'>multi_reg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span>formula <span class='op'>=</span> <span class='va'>app_per_view</span> <span class='op'>~</span> <span class='va'>remote_allowed</span> <span class='op'>+</span> <span class='va'>`Salary Level`</span> </span>
 <span>                <span class='op'>+</span> <span class='va'>application_type</span> <span class='op'>+</span> <span class='va'>sponsored</span>, data <span class='op'>=</span> <span class='va'>job_postings</span><span class='op'>)</span></span>
 <span></span>
+<span><span class='va'>var_names2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"(Intercept)"</span> <span class='op'>=</span> <span class='st'>"Intercept"</span>,</span>
+<span>                <span class='st'>"remote_allowedRemote Allowed"</span> <span class='op'>=</span> <span class='st'>"Remote Allowed"</span>,</span>
+<span>                <span class='st'>"Salary LevelLow Salary"</span> <span class='op'>=</span> <span class='st'>"Low Salary Group"</span>,</span>
+<span>                <span class='st'>"Salary LevelMedium Salary"</span> <span class='op'>=</span> <span class='st'>"Medium Salary Group"</span>,</span>
+<span>                <span class='st'>"application_typeOffsiteApply"</span> <span class='op'>=</span> <span class='st'>"Offsite Application Type"</span>,</span>
+<span>                <span class='st'>"application_typeSimpleOnsiteApply"</span> <span class='op'>=</span> <span class='st'>"Simple Onsite Application Type"</span>,</span>
+<span>                <span class='st'>"sponsored"</span> <span class='op'>=</span> <span class='st'>"Sponsored"</span><span class='op'>)</span></span>
+<span></span>
 <span><span class='fu'>modelsummary</span><span class='fu'>::</span><span class='fu'><a href='https://rdrr.io/pkg/modelsummary/man/modelsummary.html'>modelsummary</a></span><span class='op'>(</span><span class='va'>multi_reg</span>,</span>
 <span>                           statistic <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"s.e. = {std.error}"</span>,</span>
 <span>                                         <span class='st'>"p = {p.value}"</span><span class='op'>)</span>,</span>
-<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span><span class='op'>)</span></span></code></pre>
+<span>                           gof_map <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"nobs"</span>, <span class='st'>"r.squared"</span>, <span class='st'>"adj.r.squared"</span><span class='op'>)</span>,</span>
+<span>                           coef_map <span class='op'>=</span> <span class='va'>var_names2</span><span class='op'>)</span></span></code></pre>
 </div>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <thead>
@@ -1739,7 +1757,7 @@ R2 Adj.
 <tbody>
 <tr>
 <td style="text-align:left;">
-(Intercept)
+Intercept
 </td>
 <td style="text-align:center;">
 0.213
@@ -1761,7 +1779,7 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-remote_allowedRemote Allowed
+Remote Allowed
 </td>
 <td style="text-align:center;">
 0.035
@@ -1783,7 +1801,7 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-Salary LevelLow Salary
+Low Salary Group
 </td>
 <td style="text-align:center;">
 0.019
@@ -1805,7 +1823,7 @@ p = 0.009
 </tr>
 <tr>
 <td style="text-align:left;">
-Salary LevelMedium Salary
+Medium Salary Group
 </td>
 <td style="text-align:center;">
 0.021
@@ -1827,7 +1845,7 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-application_typeOffsiteApply
+Offsite Application Type
 </td>
 <td style="text-align:center;">
 −0.075
@@ -1849,7 +1867,7 @@ p = &lt;0.001
 </tr>
 <tr>
 <td style="text-align:left;">
-application_typeSimpleOnsiteApply
+Simple Onsite Application Type
 </td>
 <td style="text-align:center;">
 0.001
@@ -1871,7 +1889,7 @@ p = 0.918
 </tr>
 <tr>
 <td style="text-align:left;">
-sponsored
+Sponsored
 </td>
 <td style="text-align:center;">
 −0.006
@@ -1918,15 +1936,10 @@ R2 Adj.
 </tbody>
 </table>
 </div>
-<p>In this multivariable regression, I included <code>remote_allowed</code>, <code>Salary Level</code>, <code>application_type</code>, and <code>sponsored</code> as the explanatory variable to account for other variables on the data set that may affect the estimated effects of <code>remote_allowed</code> on the application rate. The coefficient of <code>remote_allowed</code> was 0.035, meaning that on average, jobs with a remote-working option had an application rate that was <strong>3.5 percentage points higher</strong> than that of the jobs without a remote-working option, assuming that the salary level, application type, and sponsorship status are all held constant. This is a higher difference than the single-variable regression, signaling that the other explanatory variables had actually reduced the coefficient of <code>remote_allowed</code>. This estimated coefficient is <strong>statistically significant</strong> because the <strong>p-value is less than 0.001</strong>, which is less than an alpha level of 0.05. While a 3.5 percentage points difference is still relatively small, it is safe to conclude that accounting for potential confounding variables in the data set, there is a <strong>small positive correlation</strong> between the remote-working option and the application rate.</p>
+<p>Here, the intercept was 0.213, indicating that jobs without the remote-work option have an average application rate of 21.3%, which is slightly higher than the rate in the single-variable regression. The coefficient of <code>remote_allowed</code> was 0.035, meaning that on average, jobs with a remote-working option had an application rate that was <strong>3.5 percentage points higher</strong> than that of the jobs without a remote-working option, assuming that the salary level, application type, and sponsorship status are all held constant. This is a higher difference than the single-variable regression. This estimated coefficient is <strong>statistically significant</strong> because the <strong>p-value is less than 0.001</strong>, which is less than an alpha level of 0.05. While a 3.5 percentage points difference is still relatively small, it is safe to conclude that accounting for potential confounding variables in the data set, there is a <strong>small positive correlation</strong> between the remote-working option and the application rate.</p>
 <h2 id="conclusion">Conclusion</h2>
-<h1 id="summary">Summary</h1>
-<p>The bar graphs visualizing the main outcome and explanatory variable of interest shows that jobs with the remote working option have a higher application rate on average. This was true across all three salary levels, clearly <strong>supporting my hypothesis</strong>. An interesting point to note is that the high salary group had the highest difference between the average application rate of the remote and non-remote groups. A potential reason for this is that applicants may expect high-paying jobs to have a more demanding component to the work, such as stricter rules about showing up to an office—therefore, the appeal of a high-paying job with a remote working option may be higher than the appeal of a job with a medium- or low-paying job with that option.</p>
-<p>The single-variable and multivariable regressions further support my hypothesis, with the positive estimated coefficient being statistically significant in both. The positive correlation between the remote working option and the application rate is slightly stronger on the multivariable regression model, meaning that when holding potentially confounding variables on the data set constant, the relationship becomes more accentuated.</p>
-<h1 id="limitations-and-threats-to-inference">Limitations and Threats to Inference</h1>
-<p>The findings of this study are limited to jobs in the United States, for all units in the data set were collected from the US. They are also limited to jobs offered during the time of the year that the data set was created—August—because seasonal attributes like weather may affect the types of jobs people are willing to apply for or the location of jobs they prefer. Moreover, though the facet-wrapped bar graph and multivariable regression models attempted to account for certain confounding variables in the data set, there are other potential threats to inference. For one, some LinkedIn jobs adopt the “easy apply” system, which allows users to apply to the jobs directly through the app. The convenience of this option may increase one’s inclination to apply to such jobs. The number and type of benefits that each job offers may also be a source of confounding bias; jobs with the remote-working options coupled with certain benefits, such as 401K or medical insurance, may have accentuated appeal to applicants with specific needs.</p>
-<h1 id="improving-the-analysis">Improving the Analysis</h1>
-<p>Considering these limitations and threats to inference, there are several steps to take to bolster this analysis. First, collecting data on the additional potential confounding variables mentioned (“easy apply” option and benefits offered) and including them in the regression model would help clarify and isolate the effects of the remote-working option on the application rate. It would also be helpful to conduct this study with data from previous years, especially 2020 and 2021, when the effects of the COVID-19 pandemic and subsequent social distancing regulations on employment prospects were the strongest. Comparing the results from these varying years could shed light on the evolving importance of the remote-work option for Americans in the post-pandemic world.</p>
+<p>The bar graphs visualizing the main outcome and explanatory variable of interest shows that jobs with the remote working option have a higher application rate on average. This was true across all three salary levels, clearly <strong>supporting my hypothesis</strong>. An interesting point to note is that the high salary group had the highest difference between the average application rate of the remote and non-remote groups. A potential reason for this is that applicants may expect high-paying jobs to have a more demanding component to the work, such as stricter rules about showing up to an office. Therefore, the appeal of a high-paying job with a remote working option may be higher than the appeal of a job with a medium- or low-paying job with that option. The single-variable and multivariable regression models further support my hypothesis, with the main coefficient of interest being positive and statistically significant in both. The positive correlation between the remote working option and the application rate is slightly stronger on the multivariable regression model, meaning that when holding potentially confounding variables on the data set constant, the relationship becomes more accentuated.</p>
+<p>The findings of this study are limited to jobs in the United States, for all units in the data set were collected from the US. They are also limited to jobs offered during the time of the year that the data set was created—August—because seasonal attributes like weather may affect the types and locations of jobs people prefer. Moreover, although the facet-wrapped bar graph and multivariable regression models attempted to account for confounding variables in the data set, there are other potential threats to inference. Some LinkedIn jobs adopt the “easy apply” system, which allows users to apply to the jobs directly through the app—he convenience of this option may increase one’s inclination to apply to such jobs. The number and type of benefits that each job offers may also be a source of confounding bias because jobs with the remote-working options coupled with certain benefits, such as 401K or medical insurance, may have accentuated appeal to applicants with specific needs. Considering these limitations and threats to inference, collecting data on the additional potential confounding variables mentioned and including them in the regression model would help isolate the effects of the remote-working option on the application rate. It would also be helpful to conduct this study with data from previous years, especially 2020 and 2021, when the effects of the COVID-19 pandemic and subsequent social distancing regulations on employment prospects were the strongest. Comparing the results from these varying years could shed light on the evolving importance of the remote-work option for Americans in the post-pandemic era.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
 <!--/radix_placeholder_article_footer-->
