@@ -43,9 +43,9 @@ job_postings <- data |>
 ```
 
 
+# Summary Plot of Dependent Variable
 In the graph below, I plotted the distribution of the main outcome of interest, which is the application-per-view percentage for each job posting (or `app_per_view` on the dataset). As seen in the graph, the distribution is skewed to the right, with the majority of job postings having less than a 0.50 application rate.
 
-# Summary Plot of Dependent Variable
 ```{r}
 job_postings |>
   ggplot(mapping = aes(x = app_per_view)) +
